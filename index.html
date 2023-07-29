@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enviar Coordenadas</title>
+  </head>
+  <body>
+    <h1>Enviar Coordenadas do Usuário</h1>
+
+    <script>
+      function enviarCoordenadas(latitude, longitude) {
+        const data = { latitude, longitude };
+
+        fetch("http://localhost:3000/coordenadas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            console.log(responseData); // Aqui você pode fazer o que quiser com a resposta do servidor
+          })
+          .catch((error) => {
+            console.error("Erro:", error);
+          });
+      }
+
+      function obterLocalizacao() {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+              enviarCoordenadas(latitude, longitude);
+            },
+            (error) => {
+              console.error("Erro na obtenção da localização:", error);
+            }
+          );
+        } else {
+          console.error("Geolocalização não suportada pelo navegador.");
+        }
+      }
+
+      // Chamando a função para obter a localização automaticamente ao carregar a página
+      obterLocalizacao();
+    </script>
+  </body>
+</html>
