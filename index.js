@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors"); // Importe o módulo cors
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const port = 3000;
@@ -18,7 +19,7 @@ app.post("/coordenadas", async (req, res) => {
     return res.status(400).json({ error: "Coordenadas inválidas." });
   }
   console.log(latitude, longitude);
-  data = fs.readFileSync("data.Json");
+  data = fs.readFileSync(path.join(__dirname + "/data.Json"));
   data = JSON.parse(data);
   for (let i = 0; i < data.length; i++) {
     data[i].distance = haversineDistance(
@@ -34,7 +35,7 @@ app.post("/coordenadas", async (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-  const filePath = "index.html";
+  const filePath = path.join(__dirname, "/index.html");
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       console.error("Erro ao ler o arquivo:", err);
