@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -38,7 +38,7 @@ app.post("/coordenadas", async (req, res) => {
   return res.json(data);
 });
 
-app.listen(port, () => {
+app.listen(port || 3000, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
