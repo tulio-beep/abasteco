@@ -12,6 +12,10 @@ app.use(bodyParser.json());
 // Configuração do CORS
 app.use(cors());
 
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname + "/index.html"));
+});
+
 app.post("/coordenadas", async (req, res) => {
   const { latitude, longitude } = req.body;
 
@@ -32,19 +36,6 @@ app.post("/coordenadas", async (req, res) => {
   data = await data.filter((a) => a.distance <= 50);
   console.log(data);
   return res.json(data);
-});
-
-app.get("/home", (req, res) => {
-  const filePath = path.join(__dirname, "/index.html");
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Erro ao ler o arquivo:", err);
-      res.status(500).send("Erro interno do servidor");
-    } else {
-      res.setHeader("Content-Type", "text/html");
-      res.send(data);
-    }
-  });
 });
 
 app.listen(port, () => {
