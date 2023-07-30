@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "Font"; /* This is the name you will use to refer to the font */
+  src: url("cy-grotesk-key-demi.ttf") format("truetype"); /* Replace 'customfont.ttf' with the actual font file name and format if different */
+}
+
+body {
+  font-family: "Font";
+}
+
+#Teste {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+#Distancia {
+  color: #ff5e00;
+  font-size: 16pt;
+}
+
+#logo {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+#posto_img {
+  padding: 0.8rem;
+  width: 5rem;
+  height: 5rem;
+}
+
+#inf {
+  margin-top: 5px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#posto {
+  display: flex;
+  margin-left: 0;
+  margin-top: 0.2rem;
+  border-width: 1px;
+  border-radius: 1rem;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+}
+
+header {
+  background-color: #210260;
+  padding: 10px;
+  border-radius: 1rem;
+  height: 8rem;
+}
+
+h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav li:last-child {
+  margin-right: 0;
+}
+
+nav a {
+  color: #0a0a0a;
+  text-decoration: none;
+}
