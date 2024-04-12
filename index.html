@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ABASTEÇO?</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <header><img src="img/ABASTEÇO.jpg" id="logo" /></header>
+    <div class="lista_postos">
+      <ul id="postos"></ul>
+    </div>
+
+    <script>
+      function enviarCoordenadas(latitude, longitude) {
+        const data = { latitude, longitude };
+
+        fetch("http://localhost:3000/coordenadas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            responseData = responseData.sort((a, b) => a.distance - b.distance);
+            escreverPostos(responseData); // Aqui você pode fazer o que quiser com a resposta do servidor
+          })
+          .catch((error) => {
+            console.error("Erro:", error);
+          });
+      }
+
+      function obterLocalizacao() {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+              enviarCoordenadas(latitude, longitude);
+            },
+            (error) => {
+              console.error("Erro na obtenção da localização:", error);
+            }
+          );
+        } else {
+          console.error("Geolocalização não suportada pelo navegador.");
+        }
+      }
+
+      // Chamando a função para obter a localização automaticamente ao carregar a página
+      obterLocalizacao();
+
+      function escreverPostos(postos) {
+        postos.forEach((element) => {
+          postodiv = document.createElement("div");
+          postodiv.id = "posto";
+          document.getElementById("postos").appendChild(postodiv);
+          img = document.createElement("img");
+          postodiv.appendChild(img);
+          img.src = "img/POSTO.jpg";
+          img.id = "posto_img";
+          inf = document.createElement("div");
+          inf.id = "inf";
+          postodiv.appendChild(inf);
+          nome = document.createElement("div");
+          nome.id = "Nome";
+          inf.appendChild(nome);
+          nome.innerHTML = element.RazaoSocialPosto;
+          divteste = document.createElement("div");
+          divteste.id = "Teste";
+          inf.appendChild(divteste);
+          data = new Date(element.DataColeta);
+          data = data.toLocaleDateString("pt-BR");
+          divteste.innerHTML = "Último teste:  " + data;
+          distancia = document.createElement("div");
+          distancia.id = "Distancia";
+          inf.appendChild(distancia);
+          distancia.innerHTML = "À " + element.distance.toFixed(1) + " km";
+        });
+      }
+    </script>
+  </body>
+</html>
