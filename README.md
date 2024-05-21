@@ -2,7 +2,7 @@
 
 <h2>Descrição:</h2>
 
-Este é um protótipo de aplicativo que visa auxiliar o usuário na busca por postos de combustíveis na sua proximidade que estejam dentro da tolerância documentada. O aplicativo utiliza dados catalogados pelo Inmetro no último ano para identificar os postos que atendem aos critérios de qualidade do combustível.
+Este é um protótipo de um aplicativo web (programado em um desafio de 54h) que visa auxiliar o usuário na busca por postos de combustíveis na sua proximidade que estejam dentro da tolerância documentada. O aplicativo utiliza web scraping para catalogar os dados do Inmetro no último ano para identificar os postos que atendem aos critérios de qualidade do combustível.
 
 <h2>Funcionalidades:</h2>
 
@@ -23,5 +23,4 @@ Para atualizar o banco de dados com os dados mais recentes do Inmetro, execute o
 
 <h2>Observações:</h2>
 
-Este é um protótipo e ainda está em desenvolvimento.
-A tolerância documentada para cada tipo de combustível pode ser consultada no site do Inmetro.
+Este é um protótipo.
